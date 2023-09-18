@@ -55,7 +55,7 @@ public class ContestRepository implements IContestRepository {
     @Override
     public boolean existsById(String id) {
         // TODO Auto-generated method stub
-        return false;
+    return false;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ContestRepository implements IContestRepository {
     @Override
     public void deleteById(String id) {
         // TODO Auto-generated method stub
-        
+    
     }
 
     @Override

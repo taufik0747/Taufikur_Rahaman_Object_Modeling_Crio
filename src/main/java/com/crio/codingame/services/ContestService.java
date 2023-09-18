@@ -44,12 +44,12 @@ public class ContestService implements IContestService {
             throw new QuestionNotFoundException("Cannot create Contest. Enough number of questions can not found. Please try again later!");
         }
         if(numQuestion == null || numQuestion == 0 || questions.size() <= numQuestion){
-            Contest contest = contestRepository.save(new Contest(contestName, questions,level,user,ContestStatus.NOT_STARTED));
+        Contest  contest = contestRepository.save(new Contest(contestName, questions,level,user,ContestStatus.NOT_STARTED));
             userService.attendContest(contest.getId(),contestCreator);
             return contest;
         }
         List<Question> filteredQuestionList = pickQuestionsList(questions, numQuestion);
-        Contest contest = contestRepository.save(new Contest(contestName, filteredQuestionList,level,user,ContestStatus.NOT_STARTED));
+         Contest contest = contestRepository.save(new Contest(contestName, filteredQuestionList,level,user,ContestStatus.NOT_STARTED));
         userService.attendContest(contest.getId(),contestCreator);
         return contest;
     }
@@ -58,27 +58,20 @@ public class ContestService implements IContestService {
     // Return a specific List of Random Questions as specified by numQuestion.
 
     private List<Question> pickQuestionsList(final List<Question> questions,final Integer numQuestion){
-        List<Question> pickedQuestions = new ArrayList<>();
-
-        if (numQuestion == null || numQuestion <= 0) {
-            return pickedQuestions;
-        }
-    
-        if (numQuestion >= questions.size()) {
-            return new ArrayList<>(questions);
-        }
-    
-        Random random = new Random();
-        List<Question> shuffledQuestions = new ArrayList<>(questions);
-        Collections.shuffle(shuffledQuestions);
-    
-        for (int i = 0; i < numQuestion; i++) {
-            pickedQuestions.add(shuffledQuestions.get(i));
-        }
-    
-        return pickedQuestions;
         
 
+        if (numQuestion == null || numQuestion <= 0) {
+            return Collections.emptyList();
+        }
+    
+        if (questions.size()<=numQuestion) {
+            return new ArrayList<>(questions);
+        }
+        else{
+            return new ArrayList<>(questions.subList(0, numQuestion));
+        }
+    
+        
     }
 
     // TODO: CRIO_TASK_MODULE_SERVICES

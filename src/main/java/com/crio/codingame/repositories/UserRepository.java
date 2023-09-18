@@ -59,13 +59,13 @@ public class UserRepository implements IUserRepository{
     @Override
     public void delete(User entity) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void deleteById(String id) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
